@@ -1,6 +1,6 @@
 <?php
     //ip de la o servidor d ela base de datos
-    define("DB_HOST","localhost:90");
+    define("DB_HOST","localhost");
 
     //nombre de la base de datos
     define("DB_NAME","dbsistema");
