@@ -41,7 +41,7 @@ class Categoria
     }
 
     //Implementacion del metodo listar todos los registros
-    public function listar($idcategoria)
+    public function listar()
     {
         $sql = "SELECT * FROM categoria ";
         return ejecutarConsulta($sql);
