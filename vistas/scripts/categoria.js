@@ -18,13 +18,13 @@ function mostrarform(flag) {
     limpiar();
     if (flag) {
         $("#listadoregistros").hide();
-        $("#listadoregistros").show();
+        $("#formularioregistros").show();
         $("#btnGuardar").prop("disabled", false);
     }
     else
     {
        $("#listadoregistros").show();
-       $("#listadoregistros").hide(); 
+       $("#formularioregistros").hide(); 
     }
 }
 
@@ -36,7 +36,7 @@ function cancelarform() {
 
 //funcion listar
 function listar() {
-    tabla = $().dataTable({
+    tabla = $('#tbllistado').dataTable({
         "aProcessing": true,//activamos el procesamiento del datatable
         "aServerSide": true,//Paginacion y filtrado realizados por el servidor
         dom: 'Bfrtip',//Definimos los elementos del control de tabla
