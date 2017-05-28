@@ -81,13 +81,26 @@ function guardaryeditar(e) {
         processData: false,
 
         success: function (datos) {
-           // alert(datos);
-            //mostrarform(false);
-            //tabla.ajax.reload();
+            bootbox.alert(datos);
+            mostrarform(false);
+            tabla.ajax.reload();
         }
     });
 
     limpiar();
+}
+
+function mostrar(idcategoria) {
+    $.post("../ajax/categoria.php?op=mostrar",{idcategoria : idcategoria}, function (data, status) 
+    {
+        data = JSON.parse(data);
+        mostrarform(true);
+
+        $("#nombre").val(data.nombre);
+        $("#descripcion").val(data.descripcion);
+        $("#idcategoria").val(data.idcategoria);
+
+    })
 }
 
 init();

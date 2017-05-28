@@ -38,7 +38,7 @@ switch ($_GET["op"]) {
               $data = Array();
               while ($reg=$rspta->fetch_object()) {
                   $data[]=array(
-                      "0"=>$reg->idcategoria,
+                      "0"=>'<button type="button" class="btn btn-warning" onclick="mostrar('.$reg->idcategoria.')"><i class="fa fa-pencil"></i></button>',
                       "1"=>$reg->nombre,
                       "2"=>$reg->descripcion,
                       "3"=>$reg->condicion
