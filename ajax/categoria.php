@@ -5,15 +5,16 @@ $categoria = new Categoria();
 
 $idcategoria = isset($_POST["idcategoria"]) ? limpiarCadena($_POST["idcategoria"]) : "" ;
 $nombre = isset($_POST["nombre"]) ? limpiarCadena($_POST["nombre"]) : "" ;
-$descripcioin = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"]) : "" ;
+$descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"]) : "" ;
+
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
           if (empty($idcategoria)) {
-              $rspta = $categoria->insertar($nombre,$descripcioin);
+              $rspta = $categoria->insertar($nombre,$descripcion);
               echo $rspta ? "Categoria Registrada" : "Categoria no se pudo registrar";
           }else {
-              $rspta = $categoria->editar($idcategoria,$nombre,$descripcioin);
+              $rspta = $categoria->editar($idcategoria,$nombre,$descripcion);
               echo $rspta ? "Categoria Actualizada" : "Categoria no se pudo Actualizar";
           }
         

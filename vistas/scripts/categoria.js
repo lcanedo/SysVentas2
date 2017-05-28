@@ -4,6 +4,10 @@ var tabla;
 function init() {
     mostrarform(false);
     listar();
+
+    $("#formulario").on("submit", function(e) {
+        guardaryeditar(e);
+    })
 }
 
 //funcion para limpiar
@@ -63,6 +67,27 @@ function listar() {
     }).DataTable();
 }
 
+//funcion para guardar y editar
+function guardaryeditar(e) {
+    e.preventDefault();//No se activara la accion predeterminada del evento
+    $("#btnGuardar").prop("disabled", true);
+    var formData = new FormData($("#formulario")[0]);
 
+    $.ajax({
+        url: "../ajax/categoria.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+
+        success: function (datos) {
+           // alert(datos);
+            //mostrarform(false);
+            //tabla.ajax.reload();
+        }
+    });
+
+    limpiar();
+}
 
 init();
