@@ -90,6 +90,7 @@ function guardaryeditar(e) {
     limpiar();
 }
 
+//funcion para mosstrar los registro a editar enlos compos de input
 function mostrar(idcategoria) {
     $.post("../ajax/categoria.php?op=mostrar",{idcategoria : idcategoria}, function (data, status) 
     {
@@ -100,6 +101,30 @@ function mostrar(idcategoria) {
         $("#descripcion").val(data.descripcion);
         $("#idcategoria").val(data.idcategoria);
 
+    })
+}
+
+//funcion para desactivar registros
+function desactivar(idcategoria) {
+    bootbox.confirm("Esta Seguro de desactivar la Categoria?", function (result) {
+        if (result) {
+            $.post("../ajax/categoria.php?op=desactivar", {idcategoria : idcategoria}, function (e) {
+               bootbox.alert(e);
+               tabla.ajax.reload(); 
+            });
+        }
+    })
+}
+
+//funcion para activar registros
+function activar(idcategoria) {
+    bootbox.confirm("Esta Seguro de activar la Categoria?", function (result) {
+        if (result) {
+            $.post("../ajax/categoria.php?op=activar", {idcategoria : idcategoria}, function (e) {
+               bootbox.alert(e);
+               tabla.ajax.reload(); 
+            });
+        }
     })
 }
 

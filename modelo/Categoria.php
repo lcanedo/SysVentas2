@@ -33,7 +33,14 @@ class Categoria
         return ejecutarConsulta($sql);
     }
 
-    //Implementacion del metodo nistrar los datos de un registro a modificar
+    //implementacion del metodo activar las categorias desactivadas
+    public function activar($idcategoria)
+    {
+        $sql = "UPDATE categoria SET condicion='1' WHERE idcategoria='$idcategoria' ";
+        return ejecutarConsulta($sql);
+    }
+
+    //Implementacion del metodo mostrar los datos de un registro a modificar
     public function mostrar($idcategoria)
     {
         $sql = "SELECT * FROM categoria WHERE idcategoria='$idcategoria' ";
