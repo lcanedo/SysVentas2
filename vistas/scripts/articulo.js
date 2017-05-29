@@ -12,8 +12,9 @@ function init() {
 
 //funcion para limpiar
 function limpiar() {
-    $("#idcategoria").val("");
+    $("#codigo").val("");
     $("#nombre").val("");
+    $("#stock").val("");
     $("#descripcion").val("");
 }
 
@@ -52,7 +53,7 @@ function listar() {
         ],
         "ajax":
             {
-                url :  '../ajax/categoria.php?op=listar',
+                url :  '../ajax/articulo.php?op=listar',
                 type : "get",
                 dataType : "json",
                 error: function (e) {
@@ -74,7 +75,7 @@ function guardaryeditar(e) {
     var formData = new FormData($("#formulario")[0]);
 
     $.ajax({
-        url: "../ajax/categoria.php?op=guardaryeditar",
+        url: "../ajax/articulo.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -91,24 +92,27 @@ function guardaryeditar(e) {
 }
 
 //funcion para mostrar los registro a editar enlos compos de input
-function mostrar(idcategoria) {
-    $.post("../ajax/categoria.php?op=mostrar",{idcategoria : idcategoria}, function (data, status) 
+function mostrar(idarticulo) {
+    $.post("../ajax/articulo.php?op=mostrar",{idarticulo : idarticulo}, function (data, status) 
     {
         data = JSON.parse(data);
         mostrarform(true);
 
-        $("#nombre").val(data.nombre);
-        $("#descripcion").val(data.descripcion);
         $("#idcategoria").val(data.idcategoria);
+        $("#codigo").val(data.codigo);
+        $("#nombre").val(data.nombre);
+        $("#stock").val(data.stock);
+        $("#descripcion").val(data.descripcion);
+        $("#idarticulo").val(data.idarticulo);
 
     })
 }
 
 //funcion para desactivar registros
-function desactivar(idcategoria) {
-    bootbox.confirm("Esta Seguro de desactivar la Categoria?", function (result) {
+function desactivar(idarticulo) {
+    bootbox.confirm("Esta Seguro de desactivar el Articulo ? ", function (result) {
         if (result) {
-            $.post("../ajax/categoria.php?op=desactivar", {idcategoria : idcategoria}, function (e) {
+            $.post("../ajax/articulo.php?op=desactivar", {idarticulo : idarticulo}, function (e) {
                bootbox.alert(e);
                tabla.ajax.reload(); 
             });
@@ -117,10 +121,10 @@ function desactivar(idcategoria) {
 }
 
 //funcion para activar registros
-function activar(idcategoria) {
-    bootbox.confirm("Esta Seguro de activar la Categoria?", function (result) {
+function activar(idarticulo) {
+    bootbox.confirm("Esta Seguro de activar el Articulo ? ", function (result) {
         if (result) {
-            $.post("../ajax/categoria.php?op=activar", {idcategoria : idcategoria}, function (e) {
+            $.post("../ajax/articulo.php?op=activar", {idarticulo : idarticulo}, function (e) {
                bootbox.alert(e);
                tabla.ajax.reload(); 
             });
