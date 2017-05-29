@@ -13,6 +13,17 @@ $imagen = isset($_POST["imagen"]) ? limpiarCadena($_POST["imagen"]) : "" ;
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
+
+            if (!file_exists($_FILES['imagen'][tmp_name]) || !is_uploaded_file($_FILES['imagen'][tmp_name]) ) {
+                $imagen="";
+            }else {
+                $ext = explode(".", $_FILES['imagen'][tmp_name]);
+                if ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" || $_FILES['imagen']['type'] == "image/png") {
+                    
+                    $imagen = round(microtime(true)). '.' .end($ext);
+                    move_uploaded_file($_FILE["imagen"]["tmp_name"], "../files/articulos/" . $imagen);
+                }
+            }
           if (empty($idarticulo)) {
               $rspta = $articulo->insertar($idcategoria, $codigo, $nombre, $stock, $descripcion, $imagen);
               echo $rspta ? "Articulo Registrado" : "Articulo no se pudo registrar";
@@ -49,7 +60,7 @@ switch ($_GET["op"]) {
                       "2"=>$reg->ncategoria,
                       "3"=>$reg->codigo,
                       "4"=>$reg->stock,
-                      "5"=>$reg->imagen,
+                      "5"=>"<img src='../files/articulos/".$reg->imagen."' height='50px' width='50px' alt='".$reg->imagen."'>",
                       "6"=>($reg->condicion) ? '<span class="label bg-green">Activado</span>':
                                                '<span class="label bg-red">Desactivado</span>'
                   );
